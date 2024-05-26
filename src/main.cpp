@@ -1,3 +1,4 @@
+#include <string>
 #include "main.h"
 #include "json.hpp"
 #include "globals.hpp"
@@ -24,10 +25,11 @@ void opcontrol() {
 		position += velocity * LOOP_DELAY_SEC;
 
 		MotionProfile motion_profile{position, velocity, acceleration};
-		json j = motion_profile;
+		FoxgloveMessage message = {"motion_profile", motion_profile};
+		json j = message;
 
-		std::cout << j << std::endl;
-		
+		std::cout << "DATA:" << j << std::flush;
+
 		pros::delay(LOOP_DELAY_MS);
 	}
 }
