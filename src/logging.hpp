@@ -13,11 +13,11 @@ inline void to_json(json& j, const FoxgloveMessage& msg) {
 }
 
 struct MotionProfile {
-    double position;
-    double velocity;
-    double acceleration;
+    double pos;
+    double vel;
+    double accel;
 };
 
-inline void to_json(json& j, const MotionProfile& mp) {
-    j = json{{"position", mp.position}, {"velocity", mp.velocity}, {"acceleration", mp.acceleration}};
+inline void to_json(json& j, const MotionProfile& profile) {
+    j = json{{"pos", profile.pos}, {"vel", profile.vel}, {"accel", profile.accel}};
 }

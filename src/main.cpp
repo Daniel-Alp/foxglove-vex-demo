@@ -1,7 +1,6 @@
 #include <string>
 #include "main.h"
 #include "json.hpp"
-#include "globals.hpp"
 #include "logging.hpp"
 
 using json = nlohmann::json;
@@ -17,19 +16,18 @@ void autonomous() {}
 void opcontrol() {
 	double position = 0;
 	double velocity = 0;
-	double acceleration = 2;
+	double acceleration = 1;
 
-	double i = 0;
 	while(true) {
-		velocity += acceleration * LOOP_DELAY_SEC;
-		position += velocity * LOOP_DELAY_SEC;
-
+		velocity += acceleration * 0.01;
+		position += velocity * 0.01;
+		
 		MotionProfile motion_profile{position, velocity, acceleration};
 		FoxgloveMessage message = {"motion_profile", motion_profile};
 		json j = message;
 
-		std::cout << "DATA:" << j << std::flush;
+		std::cout << j << std::flush;
 
-		pros::delay(LOOP_DELAY_MS);
+		pros::delay(10);
 	}
 }
