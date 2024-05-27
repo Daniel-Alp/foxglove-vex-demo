@@ -20,7 +20,7 @@ void opcontrol() {
 
 	while(true) {
 		vel += accel * 0.01;
-		pos += pos * 0.01;
+		pos += vel * 0.01;
 		
 		MotionProfile profile{pos, vel, accel};
 		FoxgloveMessage message = {"motion_profile", profile};
