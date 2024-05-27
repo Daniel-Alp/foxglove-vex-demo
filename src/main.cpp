@@ -14,16 +14,16 @@ void competition_initialize() {}
 void autonomous() {}
 
 void opcontrol() {
-	double position = 0;
-	double velocity = 0;
-	double acceleration = 1;
+	double pos = 0;
+	double vel = 0;
+	double accel = 1;
 
 	while(true) {
-		velocity += acceleration * 0.01;
-		position += velocity * 0.01;
+		vel += accel * 0.01;
+		pos += pos * 0.01;
 		
-		MotionProfile motion_profile{position, velocity, acceleration};
-		FoxgloveMessage message = {"motion_profile", motion_profile};
+		MotionProfile profile{pos, vel, accel};
+		FoxgloveMessage message = {"motion_profile", profile};
 		json j = message;
 
 		std::cout << j << std::flush;
