@@ -21,3 +21,13 @@ struct MotionProfile {
 inline void to_json(json& j, const MotionProfile& profile) {
     j = json{{"pos", profile.pos}, {"vel", profile.vel}, {"accel", profile.accel}};
 }
+
+struct Odometry {
+    double x;
+    double y;
+    double heading;
+};
+
+inline void to_json(json& j, const Odometry& odom) {
+    j = json{{"x", odom.x},{"y", odom.y},{"theta", odom.heading}};
+}
