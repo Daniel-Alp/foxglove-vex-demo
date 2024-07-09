@@ -3,12 +3,21 @@
 
 using json = nlohmann::json;
 
-struct FoxgloveMessage {
+
+/**
+ * Every message sent to Foxglove is a JSON string with two attributes:
+ *      - The topic is a string describing the data you are sending 
+ *        (e.g. "left_motion_profile" or "flywheel_velocity")
+ *      - The payload is an object containing the actual data.
+ * 
+ * Messages sent to the same topic name must follow the same structure. 
+ */
+struct Message {
     std::string topic;
     json payload;
 };
 
-inline void to_json(json& j, const FoxgloveMessage& msg) {
+inline void to_json(json& j, const Message& msg) {
     j = json{{"topic", msg.topic}, {"payload", msg.payload}};
 }
 
@@ -18,16 +27,16 @@ struct MotionProfile {
     double accel;
 };
 
-inline void to_json(json& j, const MotionProfile& profile) {
-    j = json{{"pos", profile.pos}, {"vel", profile.vel}, {"accel", profile.accel}};
+inline void to_json(json& j, const MotionProfile& msg) {
+    j = json{{"pos", msg.pos}, {"vel", msg.vel}, {"accel", msg.accel}};
 }
 
 struct Odometry {
     double x;
     double y;
-    double heading;
+    double theta;
 };
 
-inline void to_json(json& j, const Odometry& odom) {
-    j = json{{"x", odom.x},{"y", odom.y},{"theta", odom.heading}};
+inline void to_json(json& j, const Odometry& msg) {
+    j = json{{"x", msg.x},{"y", msg.y},{"theta", msg.theta}};
 }
